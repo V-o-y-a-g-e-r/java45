@@ -39,7 +39,7 @@ and open the template in the editor.
                 <p:column headerText="Actions">
                     <p:commandButton id="edit_flight_btn" styleClass="edit" value="Edit Flight"
                                      action="#{flightsController.actionEdit(f)}"></p:commandButton>
-                    <hr/>
+                    </p:column><p:column headerText="Actions">
                     <p:commandButton value="Remove flight" id="remove_flight_btn" 
                      styleClass="remove" update="flights_table"
                      actionListener="#{flightsController.actionListenerRemove(f)}"></p:commandButton>

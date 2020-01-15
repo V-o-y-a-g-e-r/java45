@@ -11,22 +11,34 @@
         <h:form id="flight_form" prependId="false">
             <p:messages id="msgs" autoUpdate="true"/>
             <p:panelGrid columns="1">
+                 <p:outputLabel value="Aircraft type" for="aircraft_type"/>
                 <p:inputText id="aircraft_type" required="true" 
                              value="#{flightController.flight.aircraftType}">
-                    <f:validateLength maximum="50"/>
+                    <f:ajax event="blur" render="aircraft_event"/>
+                    <f:validateLength maximum="20"/>
+                     <f:validateRegex pattern="[a-z]*"/>
                 </p:inputText>
+                <h:message id="aircraft_event" for="aircraft_type"/>
+                 <p:outputLabel value="Departure location" for="departure_location"/>
                 <p:inputText id="departure_location" required="true" 
                              value="#{flightController.flight.depatruteLocation}">
-                    <f:validateLength maximum="50"/>
+                <f:ajax event="blur" render="departure_event"/>
+                 <f:validateLength maximum="20"/>
+                     <f:validateRegex pattern="[a-z]*"/>
                 </p:inputText>
+                   <h:message id="departure_event" for="departure_location"/>
+               <p:outputLabel value="Arrival location" for="arrival_location"/>
                 <p:inputText id="arrival_location" required="true" 
                  value="#{flightController.flight.arrivalLocation}">
-                    <f:validateLength maximum="50"/>
+                    <f:ajax event="blur" render="arrival_event"/>
+                 <f:validateLength maximum="20"/>
+                     <f:validateRegex pattern="[a-z]*"/>
                 </p:inputText>
-              
+              <h:message id="arrival_event" for="arrival_location"/>
               
                 <f:facet name="footer">
-                    <p:commandButton id="edit_btn" value="Edit" action="#{flightController.actionSave()}"/>
+                    <p:commandButton id="edit_btn" value="Save" 
+                        action="#{flightController.actionSave()}"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

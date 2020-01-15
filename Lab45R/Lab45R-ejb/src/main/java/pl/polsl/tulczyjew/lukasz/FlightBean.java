@@ -45,6 +45,7 @@ public class FlightBean {
      * @return Updated or Created flight.
      */
      public Flight createOrUpdateFlight(Flight flight) {
+         System.out.println(flight.toString());
         if (flight.getId() == null) {
             this.entityManager.persist(flight);
         } else {

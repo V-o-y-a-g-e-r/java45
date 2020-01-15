@@ -5,32 +5,48 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Edit Student</title>
+        <title>Edit Passenger</title>
     </h:head>
     <h:body>
         <h:form id="passenger_form" prependId="false">
             <p:messages id="msgs" autoUpdate="true"/>
-            <p:panelGrid columns="1">
+            <p:panelGrid columns="1"> 
+                <p:outputLabel value="First name" for="first_name"/>
                 <p:inputText id="first_name" required="true" 
                      value="#{passengerController.passenger.firstName}">
-                    <f:validateLength maximum="50"/>
-                </p:inputText>
+                    <f:ajax event="blur" render="first_name_event"/>
+                    <f:validateLength maximum="20"/>
+                    <f:validateRegex pattern="[A-Z][a-z]*"/>
+                </p:inputText> 
+                <h:message id="first_name_event" for="first_name"/>
+
+                  <p:outputLabel value="Last name" for="last_name"/>
                 <p:inputText id="last_name" required="true" 
                              value="#{passengerController.passenger.lastName}">
-                    <f:validateLength maximum="50"/>
+                    <f:ajax event="blur" render="last_name_event"/>
+                    <f:validateLength maximum="20"/>
+                    <f:validateRegex pattern="[A-Z][a-z]*"/>
                 </p:inputText>
+               <h:message id="last_name_event" for="last_name"/>
+
+            <p:outputLabel value="Serivce class" for="service_class"/>
                 <p:inputText id="service_class" required="true" 
                  value="#{passengerController.passenger.serviceClass}">
-                    <f:validateLength maximum="50"/>
+                 <f:ajax event="blur" render="service_class_event"/>
+                    <f:validateLength maximum="10"/>
+                    <f:validateRegex pattern="[a-z]*"/>
                 </p:inputText>
-                <p:selectOneMenu id="flight" value="#{passengerController.flight}">
+                <h:message id="service_class_event" for="service_class"/>
+                <p:outputLabel value="Flight:" for="flight"/>
+                <p:selectOneMenu id="flight" value="#{passengerController.flight}" style="width: 20%">
                     <f:selectItems value="#{flightsController.flights}"
                                    var="flight"
                     itemLabel="#{flight.toString()}" 
                     itemValue="#{flight.id}" />
                 </p:selectOneMenu>
                 <f:facet name="footer">
-                    <p:commandButton id="edit_btn" value="Edit" action="#{passengerController.actionSave()}"/>
+                    <p:commandButton id="edit_btn" value="save choice" 
+                           action="#{passengerController.actionSave()}"/>
                 </f:facet>
             </p:panelGrid>
         </h:form>

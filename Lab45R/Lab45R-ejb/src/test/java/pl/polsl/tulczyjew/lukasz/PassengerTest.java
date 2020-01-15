@@ -14,13 +14,14 @@ import static org.junit.Assert.assertNull;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import pl.polsl.tulczyjew.lukasz.model.Flight;
+import pl.polsl.tulczyjew.lukasz.model.Passenger;
 
 /**
- * Flight test class
+ * Passenger test class
  * @author Lukasz Tulczyjew
  * @version 1.0.0
  */
-public class FlightTest {
+public class PassengerTest {
     
     private static EJBContainer container;
     private static FlightBean flightBean;
@@ -45,32 +46,42 @@ public class FlightTest {
     }
     
     @Test
+    public void test(){}
+    
+    @Test
     public void testCreate() {
-        Flight flight = new Flight("boweing", "sydney", "toszek");
+        try {
+         Flight flight = new Flight("boweing", "sydney", "toszek");
         flight = flightBean.createOrUpdateFlight(flight);
-        assertNotNull("Should be not null", flight.getId());
+        Passenger passenger = new Passenger("lukasz", "tulczyjew", "first", flight);
+        passenger = passengerBean.createOrUpdatePassenger(passenger);
+        assertNotNull("Should be not null", passenger.getId());
+        }catch(Exception ex) {System.out.println(ex.toString());}
     }
     
     @Test
     public void testDelete() {
+        try {
         Flight flight = new Flight("boweing", "sydney", "toszek");
         flight = flightBean.createOrUpdateFlight(flight);
-        flightBean.deleteFlight(flight.getId());
-        System.out.println("sffewffeww");
-        Flight flight2 = flightBean.readFlight(flight.getId());
-        assertNull("Should be null", flight2);
+        Passenger passenger = new Passenger("lukasz", "tulczyjew", "first", flight);
+        passenger = passengerBean.createOrUpdatePassenger(passenger);
+        passengerBean.deletePassenger(passenger.getId());
+         Passenger passenger2 = passengerBean.readPassenger(passenger.getId());
+        assertNull("Should be null", passenger2);
+                } catch(Exception ex) {System.out.println(ex.toString());}
+
     }
-    
     @Test
      public void testFind() {
         try {
         Flight flight = new Flight("boweing", "sydney", "toszek");
         flight = flightBean.createOrUpdateFlight(flight);
-        Flight flight2 = flightBean.readFlight(flight.getId());
-        assertNotNull("Should be not null", flight2);
-        } catch (Exception ex) {
-            {System.out.println(ex.toString());}
-        }
+        Passenger passenger = new Passenger("lukasz", "tulczyjew", "first", flight);
+        passenger = passengerBean.createOrUpdatePassenger(passenger);
+        Passenger passenger2 = passengerBean.readPassenger(passenger.getId());
+        assertNotNull("Should be not null", passenger2);
+        } catch(Exception ex) {System.out.println(ex.toString());}
     }
     
      @AfterClass
