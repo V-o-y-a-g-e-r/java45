@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Flight menu:</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form id="flights_form" prependId="false">
+            <p:dataTable id="flights_table" var="f" 
+                         value="#{flightsController.flights}"
+                         emptyMessage="No flight" rowIndexVar="idx">
+                <p:column headerText="id">
+                    <h:outputText value="#{f.id}"></h:outputText>
+                </p:column>
+                <p:column headerText="Aircraft type:">
+                    <h:outputText value="#{f.aircraftType}"></h:outputText>
+                </p:column>
+                <p:column headerText="Departure location:">
+                    <h:outputText value="#{f.depatruteLocation}">
+                    </h:outputText>                    
+                </p:column>
+                <p:column headerText="Arrival location">
+                    <h:outputText value="#{f.arrivalLocation}">
+                    </h:outputText>                    
+                </p:column>
+                <p:column headerText="Passenger">
+                    <h:outputText value="#{f.passengers}">
+                    </h:outputText>                    
+                </p:column>
+                <p:column headerText="Actions">
+                    <p:commandButton id="edit_flight_btn" styleClass="edit" value="Edit Flight"
+                                     action="#{flightsController.actionEdit(f)}"></p:commandButton>
+                    <hr/>
+                    <p:commandButton value="Remove flight" id="remove_flight_btn" 
+                     styleClass="remove" update="flights_table"
+                     actionListener="#{flightsController.actionListenerRemove(f)}"></p:commandButton>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="add_btn" value="Add" action="editflight"></p:commandButton>
+                     <p:commandButton id="menu_btn" value="Go back to menu"
+                                      action="index"></p:commandButton>
+                </f:facet>
+                </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
